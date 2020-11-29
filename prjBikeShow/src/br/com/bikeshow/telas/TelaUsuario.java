@@ -50,6 +50,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("Usuarios\n");
         setFont(new java.awt.Font("Alef", 1, 10)); // NOI18N
         setPreferredSize(new java.awt.Dimension(771, 502));
 
