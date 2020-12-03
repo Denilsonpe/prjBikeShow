@@ -60,6 +60,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel1.setText("Id:");
+        jLabel1.setToolTipText("insira um numero para id ");
 
         txtUsuId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,20 +70,26 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel2.setText("Usuário:");
+        jLabel2.setToolTipText("Insira o nome do Usuário");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel3.setText("Fone:");
+        jLabel3.setToolTipText("Insira um telefone para contato");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel4.setText("Matrícula: ");
+        jLabel4.setToolTipText("Insira um numero para matricula");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel5.setText("Função: ");
+        jLabel5.setToolTipText("Insira a função");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel6.setText("Setor: ");
+        jLabel6.setToolTipText("Escolha uma opção");
 
         cboUsuSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vendas", "Oficina", "Administração" }));
+        cboUsuSetor.setToolTipText("escolha uma opção");
         cboUsuSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboUsuSetorActionPerformed(evt);
@@ -91,14 +98,18 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         jLabel7.setText("Perfil: ");
+        jLabel7.setToolTipText("Escolha uma opção");
 
         cboUsuPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atendente", "Mecanico", "Gerente", "Administrador", " " }));
+        cboUsuPerfil.setToolTipText("escolha uma opção");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel8.setText("Login: ");
+        jLabel8.setToolTipText("insira um nome para logar");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel9.setText("Senha: ");
+        jLabel9.setToolTipText("Informe uma senha");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/criar.png"))); // NOI18N
         jButton1.setToolTipText("Adicionar");

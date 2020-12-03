@@ -169,6 +169,7 @@
           <Font name="Tahoma" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Id:"/>
+        <Property name="toolTipText" type="java.lang.String" value="insira um numero para id "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUsuId">
@@ -182,6 +183,7 @@
           <Font name="Tahoma" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Usu&#xe1;rio:"/>
+        <Property name="toolTipText" type="java.lang.String" value="Insira o nome do Usu&#xe1;rio"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TxtUsuNome">
@@ -192,6 +194,7 @@
           <Font name="Tahoma" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Fone:"/>
+        <Property name="toolTipText" type="java.lang.String" value="Insira um telefone para contato"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUsuFone">
@@ -202,6 +205,7 @@
           <Font name="Tahoma" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Matr&#xed;cula: "/>
+        <Property name="toolTipText" type="java.lang.String" value="Insira um numero para matricula"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUsuMatricula">
@@ -212,6 +216,7 @@
           <Font name="Tahoma" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Fun&#xe7;&#xe3;o: "/>
+        <Property name="toolTipText" type="java.lang.String" value="Insira a fun&#xe7;&#xe3;o"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUsuFuncao">
@@ -222,6 +227,7 @@
           <Font name="Tahoma" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Setor: "/>
+        <Property name="toolTipText" type="java.lang.String" value="Escolha uma op&#xe7;&#xe3;o"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cboUsuSetor">
@@ -233,6 +239,7 @@
             <StringItem index="2" value="Administra&#xe7;&#xe3;o"/>
           </StringArray>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="escolha uma op&#xe7;&#xe3;o"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboUsuSetorActionPerformed"/>
@@ -247,6 +254,7 @@
           <Font name="Tahoma" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Perfil: "/>
+        <Property name="toolTipText" type="java.lang.String" value="Escolha uma op&#xe7;&#xe3;o"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cboUsuPerfil">
@@ -260,6 +268,7 @@
             <StringItem index="4" value=" "/>
           </StringArray>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="escolha uma op&#xe7;&#xe3;o"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -271,6 +280,7 @@
           <Font name="Tahoma" size="14" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Login: "/>
+        <Property name="toolTipText" type="java.lang.String" value="insira um nome para logar"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUsuLogin">
@@ -281,6 +291,7 @@
           <Font name="Tahoma" size="14" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Senha: "/>
+        <Property name="toolTipText" type="java.lang.String" value="Informe uma senha"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtUsuSenha">
