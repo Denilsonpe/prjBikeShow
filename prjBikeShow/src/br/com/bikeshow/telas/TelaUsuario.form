@@ -53,7 +53,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TxtUsuNome" max="32767" attributes="0"/>
+                      <Component id="txtUsuNome" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -94,13 +94,13 @@
                       <EmptySpace min="232" pref="58" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jButton1" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="btnUsuCriar" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton5" min="-2" pref="83" max="-2" attributes="0"/>
+                      <Component id="btnUsuPesquizar" min="-2" pref="83" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="btnUsuEditar" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton4" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="btnUsuDeletar" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -115,7 +115,7 @@
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtUsuId" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TxtUsuNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUsuNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtUsuFone" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -146,15 +146,15 @@
                       </Group>
                       <EmptySpace pref="249" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton1" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="jButton5" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="btnUsuCriar" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="btnUsuPesquizar" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton2" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="jButton4" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="btnUsuEditar" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="btnUsuDeletar" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -186,7 +186,7 @@
         <Property name="toolTipText" type="java.lang.String" value="Insira o nome do Usu&#xe1;rio"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="TxtUsuNome">
+    <Component class="javax.swing.JTextField" name="txtUsuNome">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -233,10 +233,11 @@
     <Component class="javax.swing.JComboBox" name="cboUsuSetor">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="4">
             <StringItem index="0" value="Vendas"/>
             <StringItem index="1" value="Oficina"/>
             <StringItem index="2" value="Administra&#xe7;&#xe3;o"/>
+            <StringItem index="3" value="TI"/>
           </StringArray>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="escolha uma op&#xe7;&#xe3;o"/>
@@ -260,12 +261,13 @@
     <Component class="javax.swing.JComboBox" name="cboUsuPerfil">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="6">
             <StringItem index="0" value="Atendente"/>
             <StringItem index="1" value="Mecanico"/>
             <StringItem index="2" value="Gerente"/>
             <StringItem index="3" value="Administrador"/>
-            <StringItem index="4" value=" "/>
+            <StringItem index="4" value="admin"/>
+            <StringItem index="5" value=" "/>
           </StringArray>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="escolha uma op&#xe7;&#xe3;o"/>
@@ -296,7 +298,7 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtUsuSenha">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnUsuCriar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/br/com/bikeshow/icones/criar.png"/>
@@ -316,7 +318,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnUsuEditar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/br/com/bikeshow/icones/Editar.png"/>
@@ -327,7 +329,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="btnUsuDeletar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/br/com/bikeshow/icones/deletar.png"/>
@@ -338,7 +340,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="btnUsuPesquizar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/br/com/bikeshow/icones/pesquizar.png"/>
@@ -348,6 +350,9 @@
           <Color id="Cursor em Forma de M&#xe3;o"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuPesquizarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -9,13 +9,47 @@ package br.com.bikeshow.telas;
  *
  * @author denil
  */
-public class TelaUsuario extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form TelaUsuario
-     */
+import java.sql.*;
+import br.com.bikeshow.dal.ModuloConexao;
+import javax.swing.JOptionPane;
+
+public class TelaUsuario extends javax.swing.JInternalFrame {
+    
+    //variaveis p conexão com banco de dados
+    // Prepared statement e resultSet são frameworks do pacote java.sql
+    //e servem p preparar e executar as instruções SQL
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
+    //construtor
     public TelaUsuario() {
         initComponents();
+        conexao = ModuloConexao.conector();
+    }
+    
+    private void consultar(){
+        String sql = "select * from tbusuarios where iduser=?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtUsuId.getText());
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                txtUsuNome.setText(rs.getString(2));
+                txtUsuFone.setText(rs.getString(3));
+                txtUsuMatricula.setText(rs.getString(4));
+                txtUsuFuncao.setText(rs.getString(5));
+                txtUsuLogin.setText(rs.getString(7));
+                txtUsuSenha.setText(rs.getString(8));
+                //as linhas abaixo se refere ao combobox
+                cboUsuSetor.setSelectedItem(rs.getString(6));
+                cboUsuPerfil.setSelectedItem(rs.getString(9));
+            } else {
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     /**
@@ -30,7 +64,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtUsuId = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        TxtUsuNome = new javax.swing.JTextField();
+        txtUsuNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtUsuFone = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -45,10 +79,10 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         txtUsuLogin = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtUsuSenha = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnUsuCriar = new javax.swing.JButton();
+        btnUsuEditar = new javax.swing.JButton();
+        btnUsuDeletar = new javax.swing.JButton();
+        btnUsuPesquizar = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 255, 255), null, null, new java.awt.Color(0, 204, 204)));
         setClosable(true);
@@ -88,7 +122,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jLabel6.setText("Setor: ");
         jLabel6.setToolTipText("Escolha uma opção");
 
-        cboUsuSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vendas", "Oficina", "Administração" }));
+        cboUsuSetor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vendas", "Oficina", "Administração", "TI" }));
         cboUsuSetor.setToolTipText("escolha uma opção");
         cboUsuSetor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +134,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jLabel7.setText("Perfil: ");
         jLabel7.setToolTipText("Escolha uma opção");
 
-        cboUsuPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atendente", "Mecanico", "Gerente", "Administrador", " " }));
+        cboUsuPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atendente", "Mecanico", "Gerente", "Administrador", "admin", " " }));
         cboUsuPerfil.setToolTipText("escolha uma opção");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
@@ -111,24 +145,29 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jLabel9.setText("Senha: ");
         jLabel9.setToolTipText("Informe uma senha");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/criar.png"))); // NOI18N
-        jButton1.setToolTipText("Adicionar");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton1.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton1.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnUsuCriar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/criar.png"))); // NOI18N
+        btnUsuCriar.setToolTipText("Adicionar");
+        btnUsuCriar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUsuCriar.setMaximumSize(new java.awt.Dimension(80, 80));
+        btnUsuCriar.setMinimumSize(new java.awt.Dimension(80, 80));
+        btnUsuCriar.setPreferredSize(new java.awt.Dimension(80, 80));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/Editar.png"))); // NOI18N
-        jButton2.setToolTipText("Editar");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUsuEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/Editar.png"))); // NOI18N
+        btnUsuEditar.setToolTipText("Editar");
+        btnUsuEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/deletar.png"))); // NOI18N
-        jButton4.setToolTipText("Deletar");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUsuDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/deletar.png"))); // NOI18N
+        btnUsuDeletar.setToolTipText("Deletar");
+        btnUsuDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/pesquizar.png"))); // NOI18N
-        jButton5.setToolTipText("Pesquizar");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUsuPesquizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/pesquizar.png"))); // NOI18N
+        btnUsuPesquizar.setToolTipText("Pesquizar");
+        btnUsuPesquizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUsuPesquizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuPesquizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,7 +183,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtUsuNome)
+                        .addComponent(txtUsuNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -179,13 +218,13 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                 .addComponent(cboUsuPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(58, 58, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUsuCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUsuPesquizar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUsuEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUsuDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -196,7 +235,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(TxtUsuNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txtUsuFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -222,13 +261,13 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                             .addComponent(cboUsuPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnUsuCriar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUsuPesquizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(btnUsuEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUsuDeletar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
 
         setBounds(0, 0, 772, 510);
@@ -242,15 +281,19 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cboUsuSetorActionPerformed
 
+    private void btnUsuPesquizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuPesquizarActionPerformed
+        // chamando o metod consultar
+        consultar();
+    }//GEN-LAST:event_btnUsuPesquizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtUsuNome;
+    private javax.swing.JButton btnUsuCriar;
+    private javax.swing.JButton btnUsuDeletar;
+    private javax.swing.JButton btnUsuEditar;
+    private javax.swing.JButton btnUsuPesquizar;
     private javax.swing.JComboBox<String> cboUsuPerfil;
     private javax.swing.JComboBox<String> cboUsuSetor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -265,6 +308,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtUsuId;
     private javax.swing.JTextField txtUsuLogin;
     private javax.swing.JTextField txtUsuMatricula;
+    private javax.swing.JTextField txtUsuNome;
     private javax.swing.JPasswordField txtUsuSenha;
     // End of variables declaration//GEN-END:variables
 }
