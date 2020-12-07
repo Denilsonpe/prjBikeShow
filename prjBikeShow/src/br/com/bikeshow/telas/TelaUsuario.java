@@ -28,7 +28,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         initComponents();
         conexao = ModuloConexao.conector();
     }
-    
+    //metodo de consulta de usuarios
     private void consultar(){
         String sql = "select * from tbusuarios where iduser=?";
         try {
@@ -46,7 +46,38 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 cboUsuSetor.setSelectedItem(rs.getString(6));
                 cboUsuPerfil.setSelectedItem(rs.getString(9));
             } else {
+                JOptionPane.showMessageDialog(null, "Usuario não cadastrado!");
+                //as linhas abaixo "limpam" os campos
+                txtUsuNome.setText(null);
+                txtUsuFone.setText(null);
+                txtUsuMatricula.setText(null);
+                txtUsuFuncao.setText(null);
+                txtUsuLogin.setText(null);
+                txtUsuSenha.setText(null);
+                cboUsuSetor.setSelectedItem(null);
+                cboUsuPerfil.setSelectedItem(null);
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    //Metodo para adicionar usuários
+    private void adicionar(){
+        String sql = "insert into tbusuarios(iduser,usuario,fone,matricula,funcao,setor,login,senha,perfil) values(?,?,?,?,?,?,?,?,?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,txtUsuId.getText());
+            pst.setString(2,txtUsuNome.getText());
+            pst.setString(3,txtUsuFone.getText());
+            pst.setString(4,txtUsuMatricula.getText());
+            pst.setString(5,txtUsuFuncao.getText());
+            pst.setString(6,cboUsuSetor.getSelectedItem().toString());
+            pst.setString(7,txtUsuLogin.getText());
+            pst.setString(8,txtUsuSenha.getText());
+            pst.setString(9,cboUsuPerfil.getSelectedItem().toString());
+            //a linha abaixo atualiza a tabela com os dados do formulario
+            pst.executeUpdate();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -151,6 +182,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         btnUsuCriar.setMaximumSize(new java.awt.Dimension(80, 80));
         btnUsuCriar.setMinimumSize(new java.awt.Dimension(80, 80));
         btnUsuCriar.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnUsuCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuCriarActionPerformed(evt);
+            }
+        });
 
         btnUsuEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/Editar.png"))); // NOI18N
         btnUsuEditar.setToolTipText("Editar");
@@ -282,9 +318,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboUsuSetorActionPerformed
 
     private void btnUsuPesquizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuPesquizarActionPerformed
-        // chamando o metod consultar
+        // chamando o metodo consultar
         consultar();
     }//GEN-LAST:event_btnUsuPesquizarActionPerformed
+
+    private void btnUsuCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuCriarActionPerformed
+        // chamando o metodo adicionar
+        adicionar();
+    }//GEN-LAST:event_btnUsuCriarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
