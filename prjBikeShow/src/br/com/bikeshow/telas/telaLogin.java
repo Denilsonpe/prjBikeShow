@@ -12,10 +12,12 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author denil
+ * @author Denilson Petronio de Almeida
  */
 public class telaLogin extends javax.swing.JFrame {
-
+    //variaveis p conexão com banco de dados
+    // Prepared statement e resultSet são frameworks do pacote java.sql
+    //e servem p preparar e executar as instruções SQL
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;

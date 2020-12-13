@@ -7,7 +7,7 @@ package br.com.bikeshow.telas;
 
 /**
  *
- * @author denil
+ * @author Denilson Petronio de Almeida
  */
 import java.sql.*;
 import br.com.bikeshow.dal.ModuloConexao;
@@ -28,7 +28,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         conexao = ModuloConexao.conector();
     }
 
-    //metodo de consulta de usuarios
+    //metodo de consulta de usuários
     private void consultar() {
         String sql = "select * from tbusuarios where iduser=?";
         try {
@@ -79,11 +79,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
             } else {
 
-                //a linha abaixo atualiza a tabela com os dados do formulario
+                //a linha abaixo atualiza a tabela com os dados do formulário
                 //a linha abaixo é usada para confirmar a inserção dos dados na tabela
                 int adicionado = pst.executeUpdate();
-                //a linha abaixo serve de apoio p verificar o valor da variavel adicionado
-                //e entendimento da logica
+                //a linha abaixo serve de apoio p verificar o valor da variável adicionado
+                //e entendimento da lógica
                 //System.out.println(adicionado);
                 if (adicionado > 0) {//verifica se a variavel e maior que zero
                     JOptionPane.showMessageDialog(null, "Usuário adicionado com sucesso!");
