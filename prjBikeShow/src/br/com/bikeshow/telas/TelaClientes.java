@@ -91,50 +91,52 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 	    JOptionPane.showMessageDialog(null, e);
 	}
     }
-    
+
     //criando o metodo para alterar os dados do cliente
     private void alterar() {
-        String sql = "update tbclientes set nome=?,fone=?,Rg=?,endereco=?,complemento=?,bairro=?,cidade=?,estado=? where idcli=?";
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtCliNome.getText());
-            pst.setString(2, txtCliFone.getText());
-            pst.setString(3, txtCliRg.getText());
-            pst.setString(4, txtCliEndereco.getText());
-            pst.setString(5, txtCliComplemento.getText());
-            pst.setString(6, txtCliBairro.getText());
-            pst.setString(7, txtCliCidade.getText());
-            pst.setString(8, txtCliEstado.getText());
+	String sql = "update tbclientes set nome=?,fone=?,Rg=?,endereco=?,complemento=?,bairro=?,cidade=?,estado=? where idcli=?";
+	try {
+	    pst = conexao.prepareStatement(sql);
+	    pst.setString(1, txtCliNome.getText());
+	    pst.setString(2, txtCliFone.getText());
+	    pst.setString(3, txtCliRg.getText());
+	    pst.setString(4, txtCliEndereco.getText());
+	    pst.setString(5, txtCliComplemento.getText());
+	    pst.setString(6, txtCliBairro.getText());
+	    pst.setString(7, txtCliCidade.getText());
+	    pst.setString(8, txtCliEstado.getText());
 	    pst.setString(9, txtCliId.getText());
-            
-            //Validação dos campos obrigatórios
-            if ((txtCliNome.getText().isEmpty()) || (txtCliFone.getText().isEmpty()) || (txtCliRg.getText().isEmpty())) {
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
-            } else {
 
-                //a linha abaixo atualiza a tabela com os dados do formulario
-                //a linha abaixo é usada para confirmar a alteração dos dados na tabela
-                int adicionado = pst.executeUpdate();
-                //a linha abaixo serve de apoio p verificar o valor da variavel adicionado
-                //e entendimento da logica
-                System.out.println(adicionado);
-                if (adicionado > 0) {//verifica se a variavel e maior que zero
-                    JOptionPane.showMessageDialog(null, "Dados do Cliente alterados com sucesso!");
-                    //as linhas abaixo "limpam" os campos
-                    txtCliNome.setText(null);
-                    txtCliFone.setText(null);
-                    txtCliRg.setText(null);
-                    txtCliEndereco.setText(null);
-                    txtCliComplemento.setText(null);
+	    //Validação dos campos obrigatórios
+	    if ((txtCliNome.getText().isEmpty()) || (txtCliFone.getText().isEmpty()) || (txtCliRg.getText().isEmpty())) {
+		JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
+	    } else {
+
+		//a linha abaixo atualiza a tabela com os dados do formulario
+		//a linha abaixo é usada para confirmar a alteração dos dados na tabela
+		int adicionado = pst.executeUpdate();
+		//a linha abaixo serve de apoio p verificar o valor da variavel adicionado
+		//e entendimento da logica
+		System.out.println(adicionado);
+		if (adicionado > 0) {//verifica se a variavel e maior que zero
+		    JOptionPane.showMessageDialog(null, "Dados do Cliente alterados com sucesso!");
+		    //as linhas abaixo "limpam" os campos
+		    txtCliNome.setText(null);
+		    txtCliFone.setText(null);
+		    txtCliRg.setText(null);
+		    txtCliEndereco.setText(null);
+		    txtCliComplemento.setText(null);
 		    txtCliBairro.setText(null);
-                    txtCliCidade.setText(null);
-                    txtCliEstado.setText(null);
-                }
-            }
+		    txtCliCidade.setText(null);
+		    txtCliEstado.setText(null);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+		    btnAdicionar.setEnabled(true);
+		}
+	    }
+
+	} catch (Exception e) {
+	    JOptionPane.showMessageDialog(null, e);
+	}
     }
 
     //Método para setar os campos do formulário com o conteúdo da tabela
@@ -149,6 +151,39 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 	txtCliBairro.setText(tblClientes.getModel().getValueAt(setar, 6).toString());
 	txtCliCidade.setText(tblClientes.getModel().getValueAt(setar, 7).toString());
 	txtCliEstado.setText(tblClientes.getModel().getValueAt(setar, 8).toString());
+
+	// alinha abaixo desabilita o botao adicionar
+	btnAdicionar.setEnabled(false);
+    }
+
+    //Método responsável pela remoção de usuários.
+    private void remover() {
+	//A estrutura abaixo confirma a remoção do usuário
+	int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover esse Cliente?", "Atenção", JOptionPane.YES_NO_OPTION);
+	if (confirma == JOptionPane.YES_OPTION) {
+	    String sql = "delete from tbclientes where idcli=?";
+	    try {
+		pst = conexao.prepareStatement(sql);
+		pst.setString(1, txtCliId.getText());
+		int removido = pst.executeUpdate();
+		if (removido > 0) {
+		    JOptionPane.showMessageDialog(null, "Dados do Cliente removidos com sucesso!");
+		    //as linhas abaixo "limpam" os campos
+		    txtCliNome.setText(null);
+		    txtCliFone.setText(null);
+		    txtCliRg.setText(null);
+		    txtCliEndereco.setText(null);
+		    txtCliComplemento.setText(null);
+		    txtCliBairro.setText(null);
+		    txtCliCidade.setText(null);
+		    txtCliEstado.setText(null);
+		    
+		}
+
+	    } catch (Exception e) {
+		JOptionPane.showMessageDialog(null, e);
+	    }
+	}
     }
 
     /**
@@ -258,6 +293,11 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/deletar.png"))); // NOI18N
         btnExcluir.setToolTipText("Deleta um Cliente");
         btnExcluir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -424,14 +464,19 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtcliPesquisarKeyReleased
 // evento que será usado para setar os campos da tabela(com o clik do mause)
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
-        //chamando o método
+	//chamando o método
 	setar_campos();
     }//GEN-LAST:event_tblClientesMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // chamando o método alterar
+	// chamando o método alterar
 	alterar();
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // chamando o metodo remover
+	remover();
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

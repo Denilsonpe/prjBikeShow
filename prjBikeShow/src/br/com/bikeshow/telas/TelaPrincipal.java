@@ -117,6 +117,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         MemCadFornec.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
         MemCadFornec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/service_40px.png"))); // NOI18N
         MemCadFornec.setText("Fornecedores");
+        MemCadFornec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MemCadFornecActionPerformed(evt);
+            }
+        });
         MenCad.add(MemCadFornec);
 
         MemCadProdutos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
@@ -283,6 +288,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         clientes.setVisible(true);
         Desktop.add(clientes);
     }//GEN-LAST:event_MenCadCliActionPerformed
+
+    private void MemCadFornecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MemCadFornecActionPerformed
+        // chamando a tela fornecedores
+	TelaFornecedores fornecedores = new TelaFornecedores();
+	fornecedores.setVisible(true);
+	Desktop.add(fornecedores);
+    }//GEN-LAST:event_MemCadFornecActionPerformed
 
     /**
      * @param args the command line arguments

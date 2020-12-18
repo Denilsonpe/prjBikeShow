@@ -60,6 +60,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Fornecedores"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MemCadFornecActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MemCadProdutos">
               <Properties>
