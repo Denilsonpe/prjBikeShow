@@ -7,7 +7,7 @@ package br.com.bikeshow.telas;
 
 /**
  *
- * @author Denilson Petronio de Almeida
+ * @author Denilson Petrônio de Almeida
  */
 import java.sql.*;
 import br.com.bikeshow.dal.ModuloConexao;
@@ -15,20 +15,20 @@ import javax.swing.JOptionPane;
 
 public class TelaUsuario extends javax.swing.JInternalFrame {
 
-    //variaveis p conexão com banco de dados
+    //Variáveis para conexão com o banco de dados,
     // Prepared statement e resultSet são frameworks do pacote java.sql
-    //e servem p preparar e executar as instruções SQL
+    //elas servem para preparar e executar as instruções SQL.
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    //construtor
+    //Construtor.
     public TelaUsuario() {
         initComponents();
         conexao = ModuloConexao.conector();
     }
 
-    //metodo de consulta de usuários
+    //Método de consulta de usuários.
     private void consultar() {
         String sql = "select * from tbusuarios where iduser=?";
         try {
@@ -42,12 +42,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 txtUsuFuncao.setText(rs.getString(5));
                 txtUsuLogin.setText(rs.getString(7));
                 txtUsuSenha.setText(rs.getString(8));
-                //as linhas abaixo se refere ao combobox
+                //As linhas abaixo se referem ao combobox.
                 cboUsuSetor.setSelectedItem(rs.getString(6));
                 cboUsuPerfil.setSelectedItem(rs.getString(9));
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario não cadastrado!");
-                //as linhas abaixo "limpam" os campos
+                //As linhas abaixo "limpam" os campos.
                 txtUsuNome.setText(null);
                 txtUsuFone.setText(null);
                 txtUsuMatricula.setText(null);
@@ -60,7 +60,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         }
     }
 
-    //Metodo para adicionar usuários
+    //Método para adicionar usuários.
     private void adicionar() {
         String sql = "insert into tbusuarios(iduser,usuario,fone,matricula,funcao,setor,login,senha,perfil) values(?,?,?,?,?,?,?,?,?)";
         try {
@@ -74,20 +74,20 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             pst.setString(7, txtUsuLogin.getText());
             pst.setString(8, txtUsuSenha.getText());
             pst.setString(9, cboUsuPerfil.getSelectedItem().toString());
-            //Validação dos campos obrigatórios
+            //Validação dos campos obrigatórios.
             if ((txtUsuId.getText().isEmpty()) || (txtUsuNome.getText().isEmpty()) || (txtUsuLogin.getText().isEmpty()) || (txtUsuSenha.getText().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
             } else {
 
-                //a linha abaixo atualiza a tabela com os dados do formulário
-                //a linha abaixo é usada para confirmar a inserção dos dados na tabela
+                //A linha abaixo atualiza a tabela com os dados do formulário.
+                //A linha abaixo é usada para confirmar a inserção dos dados na tabela.
                 int adicionado = pst.executeUpdate();
-                //a linha abaixo serve de apoio p verificar o valor da variável adicionado
-                //e entendimento da lógica
+                //A linha abaixo serve de apoio para verificar o valor da variável adicionado
+                //e entendimento da lógica.
                 //System.out.println(adicionado);
-                if (adicionado > 0) {//verifica se a variavel e maior que zero
+                if (adicionado > 0) {//Verifica se a variável é maior que zero.
                     JOptionPane.showMessageDialog(null, "Usuário adicionado com sucesso!");
-                    //as linhas abaixo "limpam" os campos
+                    //As linhas abaixo "limpam" os campos.
                     txtUsuId.setText(null);
                     txtUsuNome.setText(null);
                     txtUsuFone.setText(null);
@@ -103,7 +103,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         }
     }
 
-    //criando o metodo para alterar os dados do usuário
+    //As linahs abaixo "criam" o método para alterar os dados do usuário.
     private void alterar() {
         String sql = "update tbusuarios set usuario=?,fone=?,matricula=?,funcao=?,setor=?,login=?,senha=?,perfil=? where iduser=?";
         try {
@@ -117,20 +117,20 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             pst.setString(7, txtUsuSenha.getText());
             pst.setString(8, cboUsuPerfil.getSelectedItem().toString());
             pst.setString(9, txtUsuId.getText());
-            //Validação dos campos obrigatórios
+            //Validação dos campos obrigatórios.
             if ((txtUsuId.getText().isEmpty()) || (txtUsuNome.getText().isEmpty()) || (txtUsuLogin.getText().isEmpty()) || (txtUsuSenha.getText().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
             } else {
 
-                //a linha abaixo atualiza a tabela com os dados do formulario
-                //a linha abaixo é usada para confirmar a alteração dos dados na tabela
+                //A linha abaixo atualiza a tabela com os dados do formulário
+                //A linha abaixo é usada para confirmar a alteração dos dados na tabela
                 int adicionado = pst.executeUpdate();
-                //a linha abaixo serve de apoio p verificar o valor da variavel adicionado
-                //e entendimento da logica
+                //A linha abaixo serve de apoio para verificar o valor da variável adicionado
+                //e entendimento da lógica.
                 //System.out.println(adicionado);
                 if (adicionado > 0) {//verifica se a variavel e maior que zero
                     JOptionPane.showMessageDialog(null, "Dados do Usuário alterados com sucesso!");
-                    //as linhas abaixo "limpam" os campos
+                    //As linhas abaixo "limpam" os campos.
                     txtUsuId.setText(null);
                     txtUsuNome.setText(null);
                     txtUsuFone.setText(null);
@@ -148,7 +148,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     
     //Método responsável pela remoção de usuários.
     private void remover(){
-        //A estrutura abaixo confirma a remoção do usuário
+        //A estrutura abaixo confirma a remoção do usuário.
         int confirma = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja remover esse usuário?","Atenção",JOptionPane.YES_NO_OPTION);
         if(confirma == JOptionPane.YES_OPTION){
             String sql = "delete from tbusuarios where iduser=?";
@@ -158,7 +158,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 int removido = pst.executeUpdate();
                 if(removido > 0){
                     JOptionPane.showMessageDialog(null, "Dados do Usuário removidos com sucesso!");
-                    //as linhas abaixo "limpam" os campos
+                    //As linhas abaixo "limpam" os campos.
                     txtUsuId.setText(null);
                     txtUsuNome.setText(null);
                     txtUsuFone.setText(null);
@@ -425,22 +425,22 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboUsuSetorActionPerformed
 
     private void btnUsuPesquizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuPesquizarActionPerformed
-        // chamando o metodo consultar
+        // Chamando o método consultar.
         consultar();
     }//GEN-LAST:event_btnUsuPesquizarActionPerformed
 
     private void btnUsuCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuCriarActionPerformed
-        // chamando o metodo adicionar
+        // Chamando o método adicionar.
         adicionar();
     }//GEN-LAST:event_btnUsuCriarActionPerformed
 
     private void btnUsuEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuEditarActionPerformed
-        // Chamando o metodo alterar:
+        // Chamando o método alterar.
         alterar();
     }//GEN-LAST:event_btnUsuEditarActionPerformed
 
     private void btnUsuDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuDeletarActionPerformed
-        // chamando o método remover.
+        // Chamando o método remover.
         remover();
     }//GEN-LAST:event_btnUsuDeletarActionPerformed
 

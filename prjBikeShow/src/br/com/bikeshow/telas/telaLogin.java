@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Denilson Petronio de Almeida
+ * @author Denilson Petrônio de Almeida
  */
 public class telaLogin extends javax.swing.JFrame {
-    //variaveis p conexão com banco de dados
+    //Variáveis para conexão com o banco de dados,
     // Prepared statement e resultSet são frameworks do pacote java.sql
-    //e servem p preparar e executar as instruções SQL
+    //elas servem para preparar e executar as instruções SQL.
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -25,19 +25,19 @@ public class telaLogin extends javax.swing.JFrame {
     public void logar() {
         String sql = "select * from tbusuarios where login=? and senha=?";
         try {
-            //as linhas abaixo preparam as consultas ao banco de dados
-            //em função do que foi digitado nas cixas de texto
-            //O interroga <?> é substituido pelo conteudo das variaveis
+            //As linhas abaixo preparam as consultas ao banco de dados,
+            //em função do que foi digitado nas cixas de texto.
+            //O interroga <?> é substituído pelo conteúdo das variáveis.
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txt_usuario.getText());
             pst.setString(2, txt_senha.getText());
             rs = pst.executeQuery();
-            //se existir usuario corrrespondente
+            //Se existir usuário corrrespondente.
             if (rs.next()) {
-                // a linha abaixo obtem o conteudo do camppo perfil da tabela tbusuario
+                // A linha abaixo obtém o conteúdo do campo perfil da tabela tbusuario.
                 String perfil = rs.getString(9);
                 //System.out.println(perfil);
-                // a estrutura abaixo faz o tratamento do perfil do usuario
+                // A estrutura abaixo faz o tratamento do perfil do usuário.
                 if (perfil.equals("admin")) {
                     TelaPrincipal principal = new TelaPrincipal();
                     principal.setVisible(true);
@@ -66,7 +66,7 @@ public class telaLogin extends javax.swing.JFrame {
     public telaLogin() {
         initComponents();
         conexao = ModuloConexao.conector();
-        //a linha abaixo serve de apoio ao status da conexão
+        //A linha abaixo serve de apoio ao status da conexão.
         //System.out.println(conexao);
         if (conexao != null) {
             lbl_status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/bikeshow/icones/dbconect.png")));
@@ -166,7 +166,7 @@ public class telaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        // chamando o metodo logar
+        // Chamando o método logar.
         logar();
     }//GEN-LAST:event_btn_loginActionPerformed
 

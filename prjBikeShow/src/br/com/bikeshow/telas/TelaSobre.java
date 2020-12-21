@@ -7,7 +7,7 @@ package br.com.bikeshow.telas;
 
 /**
  *
- * @author Denilson Petronio de Almeida
+ * @author Denilson Petrônio de Almeida
  */
 public class TelaSobre extends javax.swing.JFrame {
 

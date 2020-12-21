@@ -8,30 +8,30 @@ package br.com.bikeshow.telas;
 import java.sql.*;
 import br.com.bikeshow.dal.ModuloConexao;
 import javax.swing.JOptionPane;
-//a linha abaixo importa recursos da biblioteca rs2xml.jar para criar uma pesquisa avançada
-//junto com a tabela
+//A linha abaixo importa recursos da biblioteca rs2xml.jar para criar uma pesquisa avançada
+//junto com a tabela.
 import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author Denilson Petronio de Almeida
+ * @author Denilson Petrônio de Almeida
  */
 public class TelaClientes extends javax.swing.JInternalFrame {
 
-    //variáveis p conexão com banco de dados
+    //Variáveis para conexão com o banco de dados,
     // Prepared statement e resultSet são frameworks do pacote java.sql
-    //e servem p preparar e executar as instruções SQL
+    //elas servem para preparar e executar as instruções SQL.
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    //construtor
+    //Construtor
     public TelaClientes() {
 	initComponents();
 	conexao = ModuloConexao.conector();
     }
 
-    //Método para adicionar clientes
+    //Método para adicionar clientes.
     private void adicionar() {
 	String sql = "insert into tbclientes(nome,fone,Rg,endereco,complemento,bairro,cidade,estado) values(?,?,?,?,?,?,?,?)";
 	try {
@@ -45,20 +45,20 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 	    pst.setString(7, txtCliCidade.getText());
 	    pst.setString(8, txtCliEstado.getText());
 	    //pst.setString(9, cboUsuPerfil.getSelectedItem().toString());
-	    //Validação dos campos obrigatórios
+	    //Validação dos campos obrigatórios.
 	    if ((txtCliNome.getText().isEmpty()) || (txtCliFone.getText().isEmpty()) || (txtCliRg.getText().isEmpty())) {
 		JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
 	    } else {
 
-		//a linha abaixo atualiza a tabela com os dados do formulário
-		//a linha abaixo é usada para confirmar a inserção dos dados na tabela
+		//A linha abaixo atualiza a tabela com os dados do formulário.
+		//A linha abaixo é usada para confirmar a inserção dos dados na tabela.
 		int adicionado = pst.executeUpdate();
-		//a linha abaixo serve de apoio p verificar o valor da variável adicionado
-		//e entendimento da lógica
+		//A linha abaixo serve de apoio para verificar o valor da variável adicionado
+		//e entendimento da lógica.
 		//System.out.println(adicionado);
 		if (adicionado > 0) {//verifica se a variável e maior que zero
 		    JOptionPane.showMessageDialog(null, "Cliente adicionado com sucesso!");
-		    //as linhas abaixo "limpam" os campos
+		    //As linhas abaixo "limpam" os campos.
 		    txtCliNome.setText(null);
 		    txtCliFone.setText(null);
 		    txtCliRg.setText(null);
@@ -75,16 +75,16 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 	}
     }
 
-    //Método para pesquisar clientes pelo nome com filtro
+    //Método para pesquisar clientes pelo nome com filtro.
     private void pesquisar_cliente() {
 	String sql = "select * from tbclientes where nome like ?";
 	try {
 	    pst = conexao.prepareStatement(sql);
-	    //passando o conteudo da caixa de pesquisa para o ?
-	    //Atençõa ao "%" - continuação da string sql
+	    //passando o conteúdo da caixa de pesquisa para o ?
+	    //Atenção ao "%" - continuação da string SQL.
 	    pst.setString(1, txtcliPesquisar.getText() + "%");
 	    rs = pst.executeQuery();
-	    //a linha abaixo usa a biblioteca rs2xml.jar para preencher os campos da tabela
+	    //A linha abaixo usa a biblioteca rs2xml.jar para preencher os campos da tabela.
 	    tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
 
 	} catch (Exception e) {
@@ -92,7 +92,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 	}
     }
 
-    //criando o metodo para alterar os dados do cliente
+    //Criando o método para alterar os dados do cliente.
     private void alterar() {
 	String sql = "update tbclientes set nome=?,fone=?,Rg=?,endereco=?,complemento=?,bairro=?,cidade=?,estado=? where idcli=?";
 	try {
@@ -107,20 +107,20 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 	    pst.setString(8, txtCliEstado.getText());
 	    pst.setString(9, txtCliId.getText());
 
-	    //Validação dos campos obrigatórios
+	    //Validação dos campos obrigatórios.
 	    if ((txtCliNome.getText().isEmpty()) || (txtCliFone.getText().isEmpty()) || (txtCliRg.getText().isEmpty())) {
 		JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
 	    } else {
 
-		//a linha abaixo atualiza a tabela com os dados do formulario
-		//a linha abaixo é usada para confirmar a alteração dos dados na tabela
+		//A linha abaixo atualiza a tabela com os dados do formulário
+		//A linha abaixo é usada para confirmar a alteração dos dados na tabela.
 		int adicionado = pst.executeUpdate();
-		//a linha abaixo serve de apoio p verificar o valor da variavel adicionado
-		//e entendimento da logica
+		//A linha abaixo serve de apoio para verificar o valor da variável adicionado
+		//e entendimento da lógica.
 		System.out.println(adicionado);
-		if (adicionado > 0) {//verifica se a variavel e maior que zero
+		if (adicionado > 0) {//Verifica se a variável é maior que zero.
 		    JOptionPane.showMessageDialog(null, "Dados do Cliente alterados com sucesso!");
-		    //as linhas abaixo "limpam" os campos
+		    //As linhas abaixo "limpam" os campos.
 		    txtCliNome.setText(null);
 		    txtCliFone.setText(null);
 		    txtCliRg.setText(null);
@@ -139,7 +139,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 	}
     }
 
-    //Método para setar os campos do formulário com o conteúdo da tabela
+    //Método para setar os campos do formulário com o conteúdo da tabela.
     public void setar_campos() {
 	int setar = tblClientes.getSelectedRow();
 	txtCliId.setText(tblClientes.getModel().getValueAt(setar, 0).toString());
@@ -152,13 +152,13 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 	txtCliCidade.setText(tblClientes.getModel().getValueAt(setar, 7).toString());
 	txtCliEstado.setText(tblClientes.getModel().getValueAt(setar, 8).toString());
 
-	// alinha abaixo desabilita o botao adicionar
+	// A linha abaixo desabilita o botão adicionar.
 	btnAdicionar.setEnabled(false);
     }
 
     //Método responsável pela remoção de usuários.
     private void remover() {
-	//A estrutura abaixo confirma a remoção do usuário
+	//A estrutura abaixo confirma a remoção do usuário.
 	int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover esse Cliente?", "Atenção", JOptionPane.YES_NO_OPTION);
 	if (confirma == JOptionPane.YES_OPTION) {
 	    String sql = "delete from tbclientes where idcli=?";
@@ -168,7 +168,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 		int removido = pst.executeUpdate();
 		if (removido > 0) {
 		    JOptionPane.showMessageDialog(null, "Dados do Cliente removidos com sucesso!");
-		    //as linhas abaixo "limpam" os campos
+		    //As linhas abaixo "limpam" os campos.
 		    txtCliNome.setText(null);
 		    txtCliFone.setText(null);
 		    txtCliRg.setText(null);
@@ -454,27 +454,27 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-	// Metodopara adicionar clientes
+	// Metodo para adicionar clientes.
 	adicionar();
     }//GEN-LAST:event_btnAdicionarActionPerformed
-//o evento abaixo é do tipo "Enquato for digitando"
+//O evento abaixo é do tipo "Enquanto for digitando".
     private void txtcliPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcliPesquisarKeyReleased
-	// chamando o método pesquisar clientes
+	// Chamando o método pesquisar clientes.
 	pesquisar_cliente();
     }//GEN-LAST:event_txtcliPesquisarKeyReleased
-// evento que será usado para setar os campos da tabela(com o clik do mause)
+// Evento que será usado para setar os campos da tabela(com o click do mouse).
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
-	//chamando o método
+	//Chamando o método.
 	setar_campos();
     }//GEN-LAST:event_tblClientesMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-	// chamando o método alterar
+	// Chamando o método alterar.
 	alterar();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // chamando o metodo remover
+        // Chamando o método remover.
 	remover();
     }//GEN-LAST:event_btnExcluirActionPerformed
 

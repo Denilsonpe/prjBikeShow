@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Denilson Petronio de Almeida
+ * @author Denilson Petrônio de Almeida
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -254,7 +254,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // as linhas abaixo substituem a label lblData pela data atual do 
+        // As linhas abaixo substituem a label lblData pela data atual do 
         //sistema ao inicializar o form.
         Date data = new Date();
         DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
@@ -262,7 +262,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void MemOpcSaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MemOpcSaiActionPerformed
-        // Exibe uma caixa de dialogo.
+        // Exibe uma caixa de diálogo.
         int sair = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja Sair?","Atenção",JOptionPane.YES_NO_OPTION);
         if(sair == JOptionPane.YES_OPTION){
             System.exit(0);
@@ -270,27 +270,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MemOpcSaiActionPerformed
 
     private void MemAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MemAjudaSobreActionPerformed
-        // chamando a tela sobre.
+        // Chamando a tela sobre.
         TelaSobre sobre = new TelaSobre();
         sobre.setVisible(true);
     }//GEN-LAST:event_MemAjudaSobreActionPerformed
 
     private void MemCadUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MemCadUsuActionPerformed
-        // as linhas abaixo irão abrir o form telaususario dentro do desktopPane
+        // As linhas abaixo irão abrir o form telaususario dentro do desktopPane.
         TelaUsuario usuario =new TelaUsuario();
         usuario.setVisible(true);
         Desktop.add(usuario);
     }//GEN-LAST:event_MemCadUsuActionPerformed
 
     private void MenCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenCadCliActionPerformed
-        // chamando a tela cliente
+        // Chamando a tela cliente.
         TelaClientes clientes = new TelaClientes();
         clientes.setVisible(true);
         Desktop.add(clientes);
     }//GEN-LAST:event_MenCadCliActionPerformed
 
     private void MemCadFornecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MemCadFornecActionPerformed
-        // chamando a tela fornecedores
+        // Chamando a tela fornecedores.
 	TelaFornecedores fornecedores = new TelaFornecedores();
 	fornecedores.setVisible(true);
 	Desktop.add(fornecedores);

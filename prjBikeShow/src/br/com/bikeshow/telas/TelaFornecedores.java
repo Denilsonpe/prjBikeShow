@@ -7,7 +7,7 @@ package br.com.bikeshow.telas;
 
 /**
  *
- * @author Denilson Petronio de Almeida
+ * @author Denilson Petrônio de Almeida
  */
 import java.sql.*;
 import br.com.bikeshow.dal.ModuloConexao;
@@ -16,9 +16,9 @@ import net.proteanit.sql.DbUtils;
 
 public class TelaFornecedores extends javax.swing.JInternalFrame {
 
-    //variaveis p conexão com banco de dados
+    //Variáveis para conexão com o banco de dados,
     // Prepared statement e resultSet são frameworks do pacote java.sql
-    //e servem p preparar e executar as instruções SQL
+    //elas servem para preparar e executar as instruções SQL.
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -31,7 +31,7 @@ public class TelaFornecedores extends javax.swing.JInternalFrame {
 	conexao = ModuloConexao.conector();
     }
 
-    //Método para adicionar clientes
+    //Método para adicionar fornecedores.
     private void adicionar() {
 	String sql = "insert into tbfornecedor(idforn,nome,fone,cnpj,email,endereco,complemento,bairro,cidade,estado,cep,contato) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 	try {
@@ -49,20 +49,20 @@ public class TelaFornecedores extends javax.swing.JInternalFrame {
 	    pst.setString(11, txtfornCep.getText());
 	    pst.setString(12, txtfornContato.getText());
 	    //pst.setString(9, cboUsuPerfil.getSelectedItem().toString());
-	    //Validação dos campos obrigatórios
+	    //Validação dos campos obrigatórios.
 	    if ((txtfornNome.getText().isEmpty()) || (txtfornfone.getText().isEmpty()) || (txtfornCnpj.getText().isEmpty())) {
 		JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
 	    } else {
 
-		//a linha abaixo atualiza a tabela com os dados do formulário
-		//a linha abaixo é usada para confirmar a inserção dos dados na tabela
+		//A linha abaixo atualiza a tabela com os dados do formulário.
+		//A linha abaixo é usada para confirmar a inserção dos dados na tabela.
 		int adicionado = pst.executeUpdate();
-		//a linha abaixo serve de apoio p verificar o valor da variável adicionado
-		//e entendimento da lógica
+		//A linha abaixo serve de apoio para verificar o valor da variável adicionado
+		//e entendimento da lógica.
 		//System.out.println(adicionado);
-		if (adicionado > 0) {//verifica se a variável e maior que zero
+		if (adicionado > 0) {//Verifica se a variável é maior que zero.
 		    JOptionPane.showMessageDialog(null, "Fornecedor adicionado com sucesso!");
-		    //as linhas abaixo "limpam" os campos
+		    //As linhas abaixo "limpam" os campos.
 		    txtfornId.setText(null);
 		    txtfornNome.setText(null);
 		    txtfornfone.setText(null);
@@ -83,16 +83,16 @@ public class TelaFornecedores extends javax.swing.JInternalFrame {
 	}
     }
 
-    //Método para pesquisar clientes pelo nome com filtro
+    //Método para pesquisar fornecedores pelo nome com filtro.
     private void pesquisar_fornecedor() {
 	String sql = "select * from tbfornecedor where nome like ?";
 	try {
 	    pst = conexao.prepareStatement(sql);
-	    //passando o conteudo da caixa de pesquisa para o ?
-	    //Atençõa ao "%" - continuação da string sql
+	    //Passando o conteúdo da caixa de pesquisa para o ?
+	    //Atenção ao "%" - continuação da string SQL.
 	    pst.setString(1, txtfornNome.getText() + "%");
 	    rs = pst.executeQuery();
-	    //a linha abaixo usa a biblioteca rs2xml.jar para preencher os campos da tabela
+	    //A linha abaixo usa a biblioteca rs2xml.jar para preencher os campos da tabela.
 	    tblFornecedor.setModel(DbUtils.resultSetToTableModel(rs));
 
 	} catch (Exception e) {
@@ -100,7 +100,7 @@ public class TelaFornecedores extends javax.swing.JInternalFrame {
 	}
     }
 
-    //criando o metodo para alterar os dados do cliente
+    //Criando o método para alterar os dados do fornecedor.
     private void alterar() {
 	String sql = "update tbfornecedor set nome=?,fone=?,cnpj=?,email=?,endereco=?,complemento=?,bairro=?,cidade=?,estado=?,cep=?,contato=? where idforn=?";
 	try {
@@ -118,20 +118,20 @@ public class TelaFornecedores extends javax.swing.JInternalFrame {
 	    pst.setString(10, txtfornCep.getText());
 	    pst.setString(11, txtfornContato.getText());
 
-	    //Validação dos campos obrigatórios
+	    //Validação dos campos obrigatórios.
 	    if ((txtfornNome.getText().isEmpty()) || (txtfornfone.getText().isEmpty()) || (txtfornCnpj.getText().isEmpty())) {
 		JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
 	    } else {
 
-		//a linha abaixo atualiza a tabela com os dados do formulario
-		//a linha abaixo é usada para confirmar a alteração dos dados na tabela
+		//A linha abaixo atualiza a tabela com os dados do formulário
+		//A linha abaixo é usada para confirmar a alteração dos dados na tabela.
 		int adicionado = pst.executeUpdate();
-		//a linha abaixo serve de apoio p verificar o valor da variavel adicionado
-		//e entendimento da logica
+		//A linha abaixo serve de apoio para verificar o valor da variável adicionado
+		//e entendimento da lógica.
 		System.out.println(adicionado);
-		if (adicionado > 0) {//verifica se a variavel e maior que zero
+		if (adicionado > 0) {//Verifica se a variável é maior que zero.
 		    JOptionPane.showMessageDialog(null, "Dados do Fornecedor alterados com sucesso!");
-		    //as linhas abaixo "limpam" os campos
+		    //As linhas abaixo "limpam" os campos.
 		    txtfornId.setText(null);
 		    txtfornNome.setText(null);
 		    txtfornfone.setText(null);
@@ -154,7 +154,7 @@ public class TelaFornecedores extends javax.swing.JInternalFrame {
 	}
     }
 
-    //Método para setar os campos do formulário com o conteúdo da tabela
+    //Método para setar os campos do formulário com o conteúdo da tabela.
     public void setar_campos() {
 	int setar = tblFornecedor.getSelectedRow();
 	txtfornId.setText(tblFornecedor.getModel().getValueAt(setar, 0).toString());
@@ -170,13 +170,13 @@ public class TelaFornecedores extends javax.swing.JInternalFrame {
 	txtfornCep.setText(tblFornecedor.getModel().getValueAt(setar, 10).toString());
 	txtfornContato.setText(tblFornecedor.getModel().getValueAt(setar, 11).toString());
 
-	// alinha abaixo desabilita o botao adicionar
+	// A linha abaixo desabilita o botão adicionar.
 	btnAdicionar.setEnabled(false);
     }
 
-    //Método responsável pela remoção de usuários.
+    //Método responsável pela remoção de fornecedores.
     private void remover() {
-	//A estrutura abaixo confirma a remoção do usuário
+	//A estrutura abaixo confirma a remoção do fornecedor.
 	int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover esse fornecedor?", "Atenção", JOptionPane.YES_NO_OPTION);
 	if (confirma == JOptionPane.YES_OPTION) {
 	    String sql = "delete from tbfornecedor where idforn=?";
@@ -186,7 +186,7 @@ public class TelaFornecedores extends javax.swing.JInternalFrame {
 		int removido = pst.executeUpdate();
 		if (removido > 0) {
 		    JOptionPane.showMessageDialog(null, "Dados do fornecedor removidos com sucesso!");
-		    //as linhas abaixo "limpam" os campos
+		    //As linhas abaixo "limpam" os campos.
 		    txtfornId.setText(null);
 		    txtfornNome.setText(null);
 		    txtfornfone.setText(null);
@@ -506,26 +506,27 @@ public class TelaFornecedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtfornIdActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-	// chamndo o método adicionar
+	// Chamando o método adicionar.
 	adicionar();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-     alterar();
+	// Chamando o método alterar.
+	alterar();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnPequisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPequisarActionPerformed
-	// chamando o método pequisar fornecedor
+	// Chamando o método pequisar fornecedor.
 	pesquisar_fornecedor();
     }//GEN-LAST:event_btnPequisarActionPerformed
 
     private void tblFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFornecedorMouseClicked
-        // TODO add your handling code here:
+        // Chamando o método setar campos.
 	setar_campos();
     }//GEN-LAST:event_tblFornecedorMouseClicked
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        // TODO add your handling code here:
+        // Chamando o método remover.
 	remover();
     }//GEN-LAST:event_btnDeletarActionPerformed
 
